@@ -23,18 +23,18 @@ path_to_model_to_save = "./models/4SF.ckpt"
 path_to_results_to_save = "./results.pkl"
 time_steps = 10 # Number of time steps to consider in the recurrent network
 num_agents = 4 # Number of agents
-em_capacity = 10000 # Capacity of the experience memory
+em_capacity = 1000000 # Capacity of the experience memory
 em_reset_frequency = 100 # Frequency for resetting the experience memory (in episodes) NOT APPLIED
-batch_size = 400 # Batch size for training
+batch_size = 500 # Batch size for training
 training_frequency = 1 # Frequency of training (steps)
 boltzmann_temperature = 6 # Boltzmann temperature
-copy_weights_frequency = 50 # Frequency for copying weights from policy to target network
+copy_weights_frequency = 100 # Frequency for copying weights from policy to target network
 steps_limit = 300 # Limit of steps per episode
-discount_factor = 0.99 # Discount factor
+discount_factor = 0.9 # Discount factor
 task = 1 # 1 stands for square formation, 0 stands for dispersion
 num_actions = 9 # Number of actions
-num_neurons = [14, 14, 12] # Number of neurons in each of the three layers
-num_lstm_units = 14 # Number of LSTM units
+num_neurons = [32, 32] # Number of neurons in each of the three layers
+num_lstm_units = 32 # Number of LSTM units
 
 if __name__ == "__main__":
     vrep.simxFinish(-1) # Close all open connections
@@ -132,7 +132,7 @@ if __name__ == "__main__":
                 rewards, discrepancy, end = e.iterate_training_dispersion(step, enabled_agents)
             elif task == 1:
                 rewards, discrepancy, end = e.iterate_training_square_formation(step, enabled_agents)
-            
+                
             # Stores discrepancy and rewards
             total_discrepancy_list.append(discrepancy)
             total_reward_list.append(sum([rewards[key] for key in rewards]))

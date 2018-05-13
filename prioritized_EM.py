@@ -62,7 +62,7 @@ class PrioritizedExperienceMemory():
         min_p_beta = min(p_beta)
         # Importance-sampling weights for sampled experiences
         weights_sample = [min_p_beta/p_beta[idx] for idx in idxs]
-        
+
         return sample, list(idxs), weights_sample
     
     # Update priorities
